@@ -1,0 +1,3 @@
+syntax: glob
+
+script/bintray_config.sh
