@@ -45,8 +45,8 @@ function install_el {
 
 function install_gettext {
     
-    local fid="1RneHeV7ADxAjyRv1HqIT8TaL9Dya98ga"
-    local fver="ggt.190613"
+    local fid="1UtWPFDiaabAH55nWunJZFqhsKj1urwZi"
+    local fver="ggt.190713"
     
     install_bin $fid $fver
 }
