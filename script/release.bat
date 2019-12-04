@@ -17,7 +17,7 @@ SET CCR=%LIB%\ccr-exif
 SET EWB=%LIB%\EmbeddedWB\source
 SET ALCINOE=%LIB%\Alcinoe-code\source
 SET PASCALSCRIPT=%LIB%\PascalScript\Source
-SET MORMOT=%LIB%\mORMot;%LIB%\mORMot\SQLite3;%LIB%\mORMot.SQLite3
+SET MORMOT=%LIB%\mORMot;%LIB%\mORMot\SQLite3
 
 SET IPATH=%SRCINC%;%GR32%;%TBX%;%VSAGPS%;%SYNEDIT%;%CCR%;%EWB%;%ALCINOE%;%PASCALSCRIPT%;%MORMOT%
 SET UPATH=%BDS%\lib\win32\release;%IPATH%
