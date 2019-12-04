@@ -10,7 +10,7 @@ SET FASTCODE=%SRC%\Includes\FastCode;%SRC%\Includes\FastCode\Non.RTL
 SET SRCINC=%SRC%\Includes;%SRC%\Includes\RarProgressBar;%SRC%\Includes\Fundamentals;%SRC%\Includes\FastMM;%SRC%\Includes\BerkeleyDB;%SRC%\Includes\LibJpeg;%SRC%\Includes\FreeImage;%SRC%\Includes\LibPng;%SRC%\Includes\Compatibility;%SRC%\Includes\LibTiff;%SRC%\Includes\Proj4;%FASTCODE%
 
 SET GR32=%LIB%\graphics32\Source
-SET TBX=%LIB%\tbx;%LIB%\tb2k;%LIB%\tb2k\source
+SET TBX=%LIB%\Toolbar2000\Source;%LIB%\TBX\Source;%LIB%\TBX\Source\Themes
 SET VSAGPS=%LIB%\vsagps\Public;%LIB%\vsagps\Runtime
 SET SYNEDIT=%LIB%\SynEdit\Source
 SET CCR=%LIB%\ccr-exif
