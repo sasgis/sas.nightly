@@ -128,6 +128,14 @@ function make_archive {
     7z a -t7z -mmt1 -mx9 -md=64m -mfb=273 -ms=on "$1" -r * -xr!".*"
 }
 
+function add_user_data {
+
+    if [ ! -d "$sas_bin/UserData/" ]; then
+        mkdir "$sas_bin/UserData/"
+    fi
+    cp -u -f "$tmp/UserData/YandexApiKey.txt" "$sas_bin/UserData/"
+}
+
 function log_begin {
 
     echo "Start at: " $(date "+%Y-%m-%d %H:%M:%S")

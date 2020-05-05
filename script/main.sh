@@ -41,6 +41,7 @@ if [ $? -eq 0 ]; then
             if [[ -f "$sas_bin_release_exe_file" && -f "$sas_bin_debug_exe_file" ]]; then
               compile_lang
               make_commits_log
+              add_user_data
               sas_arch="${sas_uploads}/SAS.Planet.Nightly.${sas_date}.${UpdateRev}.7z"
               make_archive "$sas_arch"
               bintray_upload "$sas_arch" "SAS.Planet.Nightly.$sas_date.$UpdateRev.7z" "$sas_date.$UpdateRev" >> "$upload_log" 2>&1
@@ -62,6 +63,7 @@ if [ $? -eq 0 ]; then
             if [[ -f "$sas_bin_debug_exe_file" && -f "$sas_bin_release_exe_file" ]]; then
               compile_lang
               make_commits_log
+              add_user_data
               make_archive "${sas_uploads}/SAS.Planet.${sas_date}.7z"
               log_end
               exit 1
