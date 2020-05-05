@@ -22,9 +22,9 @@ function check_state {
         hg clone "$proj_lang" $sas_lang
     fi
     
-    if [ ! -d $sas_plus_maps ]; then
-        hg clone "$proj_plus_maps" $sas_plus_maps
-    fi
+    if [ ! -d $sas_maps ]; then
+        git clone "$proj_maps" $sas_maps
+    fi    
 }
 
 function print_curr_rev_info {
@@ -62,18 +62,10 @@ function pull_changes {
 
     cd $sas_maps
     echo -e "\nUpdate sas.maps"
-    hg pull -f -u --insecure "$proj_maps"
-    hg update default -C
-    print_curr_rev_info
+    git fetch --verbose "$proj_maps"
+    git clean -d -x -f
+    git reset --hard
     
-    cd $sas_plus_maps
-    echo -e "\nUpdate sas.plus.maps"
-    hg pull -f -u --insecure "$proj_plus_maps"
-    hg update default -C
-    print_curr_rev_info
-    rm -f BuildZMmp.*
-    rm -f 7za.exe
-
     cd $sas_src
     if [ "$work_type" = "NIGHTLY" ]; then
         echo -e "\nPull changes to sas.src:"

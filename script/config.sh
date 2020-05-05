@@ -6,8 +6,8 @@ proj_bin=$proj_url/sas.planet.bin
 proj_src=$proj_url/sas.planet.src
 proj_lang=$proj_url/sas.translate
 proj_lib=$proj_url/sas.requires
-proj_maps=$proj_url/sas.maps
-proj_plus_maps=$proj_url/sas.plus.maps
+
+proj_maps=https://github.com/sasgis/sas.maps
 
 tmp=$work_dir/tmp
 
@@ -19,7 +19,6 @@ sas_bin_debug_2007_exe_file=$sas_bin/SASPlanet.NonUnicode.Debug.exe
 sas_bin_release_exe_file=$sas_bin/SASPlanet.exe
 sas_bin_debug_exe_file=$sas_bin/SASPlanet.Debug.exe
 sas_maps=$sas_bin/Maps/sas.maps
-sas_plus_maps=$sas_bin/Maps/sas.plus.maps
 sas_lang=$tmp/lang
 sas_lib=$tmp/lib
 
