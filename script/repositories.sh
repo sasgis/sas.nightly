@@ -62,9 +62,9 @@ function pull_changes {
 
     cd $sas_maps
     echo -e "\nUpdate sas.maps"
-    git fetch --verbose "$proj_maps"
-    git clean -d -x -f
-    git reset --hard
+    git fetch --all --verbose
+    git clean -d -x --force
+    git reset --hard origin/master
     
     cd $sas_src
     if [ "$work_type" = "NIGHTLY" ]; then
