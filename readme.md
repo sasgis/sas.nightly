@@ -1,10 +1,10 @@
 ##### Скрипты автоматической сборки и публикации проекта SAS.Планета
 
-1. Установить [Mercurial](https://www.mercurial-scm.org/) или [TortoiseHg](http://tortoisehg.bitbucket.org/download/index.html)
+1. Установить [Git](https://git-scm.com/downloads)
 
 2. Выполнить команду из консоли: 
 
-    `hg clone https://bitbucket.org/sas_team/sas.nightly`
+    `git clone https://github.com/sasgis/sas.nightly`
 
 3. Перейти в папку `./sas.nightly/` и запустить `./install.cmd` для первоначальной загрузки и портативной установки в папку `./bin/` необходимых утилит (консольный компилятор Delphi, набор утилит gnugettext и проч.)
 
