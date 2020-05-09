@@ -19,7 +19,7 @@ function check_state {
     fi
 
     if [ ! -d $sas_lang ]; then
-        hg clone "$proj_lang" $sas_lang
+        git clone "$proj_lang" $sas_lang
     fi
     
     if [ ! -d $sas_maps ]; then
@@ -33,17 +33,25 @@ function print_curr_rev_info {
     echo -e $(hg log --rev . --template "$template")
 }
 
+function update_git_repo {
+    
+    local repo_path=$1
+    
+    cd ${repo_path}
+    
+    git fetch --all --verbose
+    git clean -d -x --force
+    git reset --hard origin/master
+}
+
 function pull_changes {
 
     # Check root folders struct
     check_state
 
     # Pulling changes
-    cd $sas_lang
     echo -e "\nUpdate sas.translate:"
-    hg update default -C
-    hg pull -f -u --insecure $proj_lang
-    print_curr_rev_info
+    update_git_repo $sas_lang
 
     cd $sas_lib
     echo -e "\nUpdate sas.requires:"
@@ -60,11 +68,8 @@ function pull_changes {
     hg update default -C
     print_curr_rev_info
 
-    cd $sas_maps
     echo -e "\nUpdate sas.maps"
-    git fetch --all --verbose
-    git clean -d -x --force
-    git reset --hard origin/master
+    update_git_repo $sas_maps
     
     cd $sas_src
     if [ "$work_type" = "NIGHTLY" ]; then
