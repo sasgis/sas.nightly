@@ -107,7 +107,7 @@ function compile_debug {
 function make_commits_log {
 
     cd $sas_src
-    hg log --encoding utf8 > "$sas_bin/CommitsLog.txt"
+    git log > "$sas_bin/CommitsLog.txt"
 }
 
 function compile_lang {

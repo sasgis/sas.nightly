@@ -7,7 +7,7 @@ function check_state {
     cd $tmp
 
     if [ ! -d $sas_src ]; then
-        hg clone "$proj_src" $sas_src
+        git clone "$proj_src" $sas_src
     fi
 
     if [ ! -d $sas_bin ]; then
@@ -68,27 +68,17 @@ function pull_changes {
     hg update default -C
     print_curr_rev_info
 
-    echo -e "\nUpdate sas.maps"
+    echo -e "\nUpdate sas.maps:"
     update_git_repo $sas_maps
-    
-    cd $sas_src
+        
+    echo -e "\nUpdate sas.src:"
     if [ "$work_type" = "NIGHTLY" ]; then
-        echo -e "\nPull changes to sas.src:"
-        hg pull -f "$proj_src"
-        echo -e $(hg log --template "\nLocal revision: {rev}:{node|short} [{branch}]\n\n" -r .)
-        LocalRev=$(hg log --template "{rev}" -r .)
-        hg log --encoding utf8 -r .:
-        echo -e "Apply changes to sas.src:"
-        hg update default -C
-        echo -e $(hg log --template "\nUpdate to revision: {rev}:{node|short} [{branch}]\n\n" -r .)
-        UpdateRev=$(hg log --template "{rev}" -r .)
-        UpdateNode=$(hg log --template "{node}" -r .)
-    else
-        echo -e "\nUpdate sas.src:"
-        hg update default -C
-        hg pull -f -u "$proj_src"
-        print_curr_rev_info
-        UpdateRev=$(hg log --template "{rev}" -r .)
-        UpdateNode=$(hg log --template "{node}" -r .)
+        cd $sas_src
+        LocalRev=$(git rev-list master --count)
+        LocalNode=$(git rev-parse master)
     fi
+    update_git_repo $sas_src
+    cd $sas_src
+    UpdateRev=$(git rev-list master --count)
+    UpdateNode=$(git rev-parse master)
 }

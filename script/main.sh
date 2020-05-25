@@ -30,7 +30,7 @@ clear_sas_bin
 
 if [ $? -eq 0 ]; then
     if [ "$work_type" = "NIGHTLY" ]; then
-        if [ "$LocalRev" -eq "$UpdateRev" ]; then
+        if [ "$LocalNode" -eq "$UpdateNode" ]; then
             echo -e "Hint: No updates found\n"
         else
             prepare_version_info "$UpdateRev"
