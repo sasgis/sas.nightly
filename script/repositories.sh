@@ -15,7 +15,7 @@ function check_state {
     fi
 
     if [ ! -d $sas_lib ]; then
-        hg clone "$proj_lib" $sas_lib
+        git clone "$proj_lib" $sas_lib
     fi
 
     if [ ! -d $sas_lang ]; then
@@ -52,14 +52,12 @@ function pull_changes {
     # Pulling changes
     echo -e "\nUpdate sas.translate:"
     update_git_repo $sas_lang
-
-    cd $sas_lib
+    
     echo -e "\nUpdate sas.requires:"
-    hg update default -C
-    hg pull -f -u --insecure "$proj_lib"
-    print_curr_rev_info
-    ReqRev=$(hg log --template "{rev}" -r .)
-    ReqNode=$(hg log --template "{node}" -r .)
+    update_git_repo $sas_lib
+    cd $sas_lib
+    ReqRev=$(git rev-list master --count)
+    ReqNode=$(git rev-parse master)
 
     cd $sas_bin
     echo -e "\nUpdate sas.release:"

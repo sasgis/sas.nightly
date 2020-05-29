@@ -3,9 +3,9 @@
 proj_url=https://bitbucket.org/sas_team
 
 proj_bin=$proj_url/sas.planet.bin
-proj_lib=$proj_url/sas.requires
 
 proj_src=https://github.com/sasgis/sas.planet.src
+proj_lib=https://github.com/sasgis/sas.requires
 proj_maps=https://github.com/sasgis/sas.maps
 proj_lang=https://github.com/sasgis/sas.translate
 
