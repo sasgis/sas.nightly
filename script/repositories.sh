@@ -11,7 +11,7 @@ function check_state {
     fi
 
     if [ ! -d $sas_bin ]; then
-        hg clone "$proj_bin" $sas_bin
+        git clone "$proj_bin" $sas_bin
     fi
 
     if [ ! -d $sas_lib ]; then
@@ -25,12 +25,6 @@ function check_state {
     if [ ! -d $sas_maps ]; then
         git clone "$proj_maps" $sas_maps
     fi    
-}
-
-function print_curr_rev_info {
-
-    local template="Current revision: {rev}:{node|short} [{branch}]\n\n"
-    echo -e $(hg log --rev . --template "$template")
 }
 
 function update_git_repo {
@@ -59,12 +53,8 @@ function pull_changes {
     ReqRev=$(git rev-list master --count)
     ReqNode=$(git rev-parse master)
 
-    cd $sas_bin
     echo -e "\nUpdate sas.release:"
-    hg update default -C
-    hg pull -f -u --insecure "$proj_bin"
-    hg update default -C
-    print_curr_rev_info
+    update_git_repo $sas_bin
 
     echo -e "\nUpdate sas.maps:"
     update_git_repo $sas_maps

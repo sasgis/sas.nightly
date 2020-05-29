@@ -1,13 +1,12 @@
 #!/bin/bash -ex
 
-proj_url=https://bitbucket.org/sas_team
+proj_url=https://github.com/sasgis
 
 proj_bin=$proj_url/sas.planet.bin
-
-proj_src=https://github.com/sasgis/sas.planet.src
-proj_lib=https://github.com/sasgis/sas.requires
-proj_maps=https://github.com/sasgis/sas.maps
-proj_lang=https://github.com/sasgis/sas.translate
+proj_src=$proj_url/sas.planet.src
+proj_lib=$proj_url/sas.requires
+proj_maps=$proj_url/sas.maps
+proj_lang=$proj_url/sas.translate
 
 tmp=$work_dir/tmp
 

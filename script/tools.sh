@@ -112,6 +112,10 @@ function make_commits_log {
 
 function compile_lang {
 
+    if [ ! -d "$sas_bin/lang" ]; then
+        mkdir "$sas_bin/lang"
+    fi
+    
     cd $sas_lang
     
     PATH="$work_dir/bin/gnugettext:$PATH"
