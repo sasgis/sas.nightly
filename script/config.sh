@@ -5,7 +5,7 @@ proj_url=https://github.com/sasgis
 proj_bin=$proj_url/sas.planet.bin
 proj_src=$proj_url/sas.planet.src
 proj_lib=$proj_url/sas.requires
-proj_maps=$proj_url/sas.maps
+# proj_maps=$proj_url/sas.maps
 proj_lang=$proj_url/sas.translate
 
 tmp=$work_dir/tmp
