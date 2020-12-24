@@ -137,7 +137,7 @@ function add_user_data {
     if [ ! -d "$sas_bin/UserData/" ]; then
         mkdir "$sas_bin/UserData/"
     fi
-    cp -u -f "$tmp/UserData/YandexApiKey.txt" "$sas_bin/UserData/"
+    # cp -u -f "$tmp/UserData/YandexApiKey.txt" "$sas_bin/UserData/"
 }
 
 function log_begin {
