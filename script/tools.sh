@@ -132,12 +132,17 @@ function make_archive {
     7z a -t7z -mmt1 -mx9 -md=64m -mfb=273 -ms=on "$1" -r * -xr!".*"
 }
 
-function add_user_data {
+function add_external_dlls {
 
-    if [ ! -d "$sas_bin/UserData/" ]; then
-        mkdir "$sas_bin/UserData/"
+    local libtz_v="v210124"
+    local libtz_zip="${work_dir}/cache/libtz-win32-${libtz_v}.zip"
+    local libtz_url="https://github.com/zedxxx/libtz/releases/download/${libtz_v}/libtz-win32.zip"
+    
+    if [ ! -f $libtz_zip ]; then
+        curl --retry 3 -L $libtz_url --output $libtz_zip    
     fi
-    # cp -u -f "$tmp/UserData/YandexApiKey.txt" "$sas_bin/UserData/"
+    
+    7z x -y $libtz_zip -o"${sas_bin}" *.dll -r
 }
 
 function log_begin {
