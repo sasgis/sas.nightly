@@ -8,7 +8,7 @@ work_type=$2
 . ./script/config.sh
 . ./script/repositories.sh
 . ./script/tools.sh
-. ./script/bintray.sh
+. ./script/bitbucket.sh
 
 log_begin
 
@@ -42,9 +42,9 @@ if [ $? -eq 0 ]; then
               compile_lang
               make_commits_log
               add_external_dlls
-              sas_arch="${sas_uploads}/SAS.Planet.Nightly.${sas_date}.${UpdateRev}.7z"
-              make_archive "$sas_arch"
-              bintray_upload "$sas_arch" "SAS.Planet.Nightly.$sas_date.$UpdateRev.7z" "$sas_date.$UpdateRev" >> "$upload_log" 2>&1
+              sas_arch="SAS.Planet.Nightly.${sas_date}.${UpdateRev}.7z"
+              make_archive "${sas_uploads}/${sas_arch}"
+              bitbucket_upload "${sas_uploads}" "${sas_arch}" >> "$upload_log" 2>&1
               log_end
               exit 1
             else

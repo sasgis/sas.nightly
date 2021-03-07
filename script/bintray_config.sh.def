@@ -1,8 +1,0 @@
-#!/bin/bash
-
-API=https://api.bintray.com
-
-BINTRAY_USER=%user%
-BINTRAY_API_KEY=%key%
-BINTRAY_REPO=SASPlanet
-PCK_NAME=Nightly
