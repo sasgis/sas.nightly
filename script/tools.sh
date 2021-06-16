@@ -144,6 +144,17 @@ function add_external_dlls {
     fi
     
     7z x -y $libtz_zip -o"${sas_bin}" *.dll -r
+    
+    # libge
+    local libge_v="20170406"
+    local libge_zip="${work_dir}/cache/libge_${libge_v}.zip"
+    local libge_url="https://bitbucket.org/greverse/greverse.bitbucket.org/downloads/libge_${libge_v}.zip"
+    
+    if [ ! -f $libge_zip ]; then
+        curl --retry 3 -L $libge_url --output $libge_zip    
+    fi
+    
+    7z x -y $libge_zip -o"${sas_bin}" libge.dll leveldb.dll
 }
 
 function log_begin {
