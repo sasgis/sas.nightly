@@ -134,9 +134,10 @@ function make_archive {
 
 function add_external_dlls {
 
-    local libtz_v="v210124"
-    local libtz_zip="${work_dir}/cache/libtz-win32-${libtz_v}.zip"
-    local libtz_url="https://github.com/zedxxx/libtz/releases/download/${libtz_v}/libtz-win32.zip"
+    # libtz
+    local libtz_v="1.0.0"
+    local libtz_zip="${work_dir}/cache/libtz-${libtz_v}-win32-fpc.zip"
+    local libtz_url="https://github.com/zedxxx/libtz/releases/download/v${libtz_v}/libtz-${libtz_v}-win32-fpc.zip"
     
     if [ ! -f $libtz_zip ]; then
         curl --retry 3 -L $libtz_url --output $libtz_zip    
