@@ -132,29 +132,43 @@ function make_archive {
     7z a -t7z -mmt1 -mx9 -md=64m -mfb=273 -ms=on "$1" -r * -xr!".*"
 }
 
+function get_external_dll {
+    
+    local lib_zip=$1
+    local lib_url=$2
+    local lib_dll=$3
+    
+    if [ ! -f $lib_zip ]; then
+        curl --retry 3 -L $lib_url --output $lib_zip
+    fi
+    
+    7z x -y $lib_zip -o"${sas_bin}" $lib_dll
+}
+
 function add_external_dlls {
 
-    # libtz
-    local libtz_v="1.0.0"
-    local libtz_zip="${work_dir}/cache/libtz-${libtz_v}-win32-fpc.zip"
-    local libtz_url="https://github.com/zedxxx/libtz/releases/download/v${libtz_v}/libtz-${libtz_v}-win32-fpc.zip"
-    
-    if [ ! -f $libtz_zip ]; then
-        curl --retry 3 -L $libtz_url --output $libtz_zip    
-    fi
-    
-    7z x -y $libtz_zip -o"${sas_bin}" *.dll -r
+    local lib_v lib_zip lib_url
     
     # libge
-    local libge_v="20170406"
-    local libge_zip="${work_dir}/cache/libge_${libge_v}.zip"
-    local libge_url="https://bitbucket.org/greverse/greverse.bitbucket.org/downloads/libge_${libge_v}.zip"
+    lib_v="20170406"
+    lib_zip="${work_dir}/cache/libge_${lib_v}.zip"
+    lib_url="https://bitbucket.org/greverse/greverse.bitbucket.org/downloads/libge_${lib_v}.zip"
     
-    if [ ! -f $libge_zip ]; then
-        curl --retry 3 -L $libge_url --output $libge_zip    
-    fi
+    get_external_dll $lib_zip $lib_url "libge.dll leveldb.dll"
+
+    # libtz
+    lib_v="1.0.0"
+    lib_zip="${work_dir}/cache/libtz-${lib_v}-win32-fpc.zip"
+    lib_url="https://github.com/zedxxx/libtz/releases/download/v${lib_v}/libtz-${lib_v}-win32-fpc.zip"
     
-    7z x -y $libge_zip -o"${sas_bin}" libge.dll leveldb.dll
+    get_external_dll $lib_zip $lib_url "libtz.dll"
+    
+    # libosmscout_route
+    lib_v="v1.0.0"
+    lib_zip="${work_dir}/cache/libosmscout_route-${lib_v}-win32.zip"
+    lib_url="https://github.com/zedxxx/libosmscout-route/releases/download/${lib_v}/libosmscout_route-${lib_v}-win32.zip"
+    
+    get_external_dll $lib_zip $lib_url "libosmscout_route.dll"
 }
 
 function log_begin {
