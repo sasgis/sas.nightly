@@ -150,7 +150,7 @@ function add_external_dlls {
     local lib_v lib_zip lib_url
     
     # libge
-    lib_v="20170406"
+    lib_v="20210717"
     lib_zip="${work_dir}/cache/libge_${lib_v}.zip"
     lib_url="https://bitbucket.org/greverse/greverse.bitbucket.org/downloads/libge_${lib_v}.zip"
     
