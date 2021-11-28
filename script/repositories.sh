@@ -56,17 +56,18 @@ function pull_changes {
     echo -e "\nUpdate sas.release:"
     update_git_repo $sas_bin
 
-    echo -e "\nUpdate sas.maps:"
+    # echo -e "\nUpdate sas.maps:"
     # update_git_repo $sas_maps
         
     echo -e "\nUpdate sas.src:"
+    cd $sas_src
     if [ "$work_type" = "NIGHTLY" ]; then
-        cd $sas_src
         LocalRev=$(git rev-list master --count)
         LocalNode=$(git rev-parse master)
     fi
-    update_git_repo $sas_src
-    cd $sas_src
+    if [ ! "$work_type" = "TEST" ]; then
+        update_git_repo $sas_src
+    fi
     UpdateRev=$(git rev-list master --count)
     UpdateNode=$(git rev-parse master)
 }

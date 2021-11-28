@@ -72,6 +72,21 @@ if [ $? -eq 0 ]; then
               log_end
               exit 2
             fi
+        else
+            prepare_version_info "$UpdateRev"
+            prepare_build_info "1,$sas_date,Test,$UpdateRev,$UpdateNode,$ReqRev,$ReqNode"
+            compile_debug
+            if [[ -f "$sas_bin_debug_exe_file" ]]; then
+              compile_lang
+              add_external_dlls
+              make_archive "${sas_uploads}/SAS.Planet.Test.${sas_date}.7z"
+              log_end
+              exit 1
+            else
+              echo -e "Compile error! For details see compile log."
+              log_end
+              exit 2
+            fi    
         fi
     fi
 fi
