@@ -1,13 +1,28 @@
 cd ..\..\
 
+SET XE2=0
+
+if "%XE2%" == "1" (
+  set BDS_VER=9.0
+  set AL_NAME=alcinoe
+) else (
+  set BDS_VER=20.0
+  set AL_NAME=alcinoe-code
+)
+
 SET ROOT=%CD%
-SET BDS=%ROOT%\bin\delphi\20.0
+SET BDS=%ROOT%\bin\delphi\%BDS_VER%
 SET ECC=%ROOT%\bin\eurekalog
 SET PATH=%BDS%\bin;%ECC%\bin;%PATH%
 SET LIB=%ROOT%\tmp\lib
 SET SRC=%ROOT%\tmp\src
+SET INC=%SRC%\includes
 SET ELOG=%ECC%\lib
-SET SRCINC=%SRC%\Includes;%SRC%\Includes\RarProgressBar;%SRC%\Includes\Fundamentals;%SRC%\Includes\BerkeleyDB;%SRC%\Includes\LibJpeg;%SRC%\Includes\FreeImage;%SRC%\Includes\LibPng;%SRC%\Includes\Compatibility;%SRC%\Includes\LibTiff;%SRC%\Includes\Proj4
+SET SRCINC=%INC%;%INC%\RarProgressBar;%INC%\Fundamentals;%INC%\BerkeleyDB;%INC%\LibJpeg;%INC%\FreeImage;%INC%\LibPng;%INC%\Compatibility;%INC%\LibTiff;%INC%\Proj4
+
+if "%XE2%" == "1" (
+  set SRCINC=%SRCINC%;%SRC%\Placeholders
+)
 
 SET GR32=%LIB%\graphics32\Source
 SET TBX=%LIB%\Toolbar2000\Source;%LIB%\TBX\Source;%LIB%\TBX\Source\Themes
@@ -15,7 +30,7 @@ SET VSAGPS=%LIB%\vsagps\Public;%LIB%\vsagps\Runtime
 SET SYNEDIT=%LIB%\SynEdit\Source
 SET CCR=%LIB%\ccr-exif
 SET EWB=%LIB%\EmbeddedWB\source
-SET ALCINOE=%LIB%\alcinoe-code\source
+SET ALCINOE=%LIB%\%AL_NAME%\source
 SET PASCALSCRIPT=%LIB%\PascalScript\Source
 SET MORMOT=%LIB%\mORMot;%LIB%\mORMot\SQLite3
 
