@@ -164,7 +164,7 @@ function add_external_dlls {
     get_external_dll $lib_zip $lib_url "libtz.dll"
     
     # libosmscout_route
-    lib_v="v1.0.0"
+    lib_v="v1.0.1"
     lib_zip="${work_dir}/cache/libosmscout_route-${lib_v}-win32.zip"
     lib_url="https://github.com/zedxxx/libosmscout-route/releases/download/${lib_v}/libosmscout_route-${lib_v}-win32.zip"
     
