@@ -21,10 +21,12 @@ function clear_tmp {
 
     rm -f $sas_exe_file
     rm -f $sas_map_file
+    
     rm -f $bin_ru_mo
     rm -f $bin_fr_mo
     rm -f $bin_uk_mo
     rm -f $bin_es_mo
+    rm -f $bin_tr_mo
     
     cd $sas_uploads
     rm -f *.7z
@@ -126,6 +128,7 @@ function compile_lang {
     msgfmt "$sas_fr_po" -o "$bin_fr_mo"
     msgfmt "$sas_uk_po" -o "$bin_uk_mo"
     msgfmt "$sas_es_po" -o "$bin_es_mo"
+    msgfmt "$sas_tr_po" -o "$bin_tr_mo"
 }
 
 function make_archive {

@@ -47,8 +47,10 @@ sas_ru_po=$sas_lang/ru.po
 sas_fr_po=$sas_lang/fr.po
 sas_uk_po=$sas_lang/uk.po
 sas_es_po=$sas_lang/es.po
+sas_tr_po=$sas_lang/tr.po
 
 bin_ru_mo=$sas_bin/lang/ru.mo
 bin_fr_mo=$sas_bin/lang/fr.mo
 bin_uk_mo=$sas_bin/lang/uk.mo
 bin_es_mo=$sas_bin/lang/es.mo
+bin_tr_mo=$sas_bin/lang/tr.mo
