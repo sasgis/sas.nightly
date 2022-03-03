@@ -99,9 +99,11 @@ function compile_release {
 function compile_debug {
 
     cd $sas_src
-    cp -u -f "$sas_eurekalog_pas" "$sas_src"
-    sed -i "s/^uses/uses EurekaLog,/i" "$sas_src/SASPlanet.dpr"
-    compile_project "debug.bat" "$debug_log" "$sas_bin_debug_exe_file"    
+    cp -f "$sas_eurekalog_pas" "$sas_src"
+    sed -bi "s/^uses/uses EurekaLog,/i" "$sas_src/SASPlanet.dpr"
+    compile_project "debug.bat" "$debug_log" "$sas_bin_debug_exe_file"
+    
+    sed -bi "s/^uses EurekaLog,/uses/i" "$sas_src/SASPlanet.dpr"
 }
 
 function make_commits_log {
@@ -139,7 +141,7 @@ function get_external_dll {
     local lib_dll=$3
     
     if [ ! -f $lib_zip ]; then
-        curl --retry 3 -L $lib_url --output $lib_zip
+        curl -v --retry 3 -L $lib_url --output $lib_zip
     fi
     
     7z x -y $lib_zip -o"${sas_bin}" $lib_dll
@@ -182,7 +184,7 @@ function log_end {
 
     cd $sas_log
     if [ -f "main.log" ]; then
-        cp -u -f "main.log" "$cur_log_folder"
+        cp -f "main.log" "$cur_log_folder"
     fi
         
     7z a -t7z -ms=on "${cur_log_folder}.7z" -r "${cur_log_folder}/*"
