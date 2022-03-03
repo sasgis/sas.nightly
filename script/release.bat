@@ -1,7 +1,7 @@
 cd ..\..\
 
 SET ROOT=%CD%
-SET BDS=%ROOT%\bin\delphi\20.0
+SET BDS=%ROOT%\bin\delphi\21.0
 SET PATH=%BDS%\bin;%PATH%
 SET LIB=%ROOT%\tmp\lib
 SET SRC=%ROOT%\tmp\src
@@ -29,6 +29,6 @@ cd %SRC%
 
 SET ALIAS=Generics.Collections=System.Generics.Collections;Generics.Defaults=System.Generics.Defaults;WinTypes=Windows;WinProcs=Windows;DbiTypes=BDE;DbiProcs=BDE;DbiErrs=BDE
 
-SET NAMESPASE=System.Win;Data.Win;Datasnap.Win;Web.Win;Soap.Win;Xml.Win;Bde;Vcl;Vcl.Imaging;Vcl.Touch;Vcl.Samples;Vcl.Shell;System;Xml;Data;Datasnap;Web;Soap;Winapi;
+SET NAMESPASE=System.Win;Data.Win;Datasnap.Win;Web.Win;Soap.Win;Xml.Win;Bde;Vcl;Vcl.Imaging;Vcl.Touch;Vcl.Samples;Vcl.Shell;System;Xml;Data;Datasnap;Web;Soap;Winapi;VclTee;
 
 DCC32.EXE --no-config -B SASPlanet.dpr -CG -TX.exe -A%ALIAS% -NS%NAMESPASE% -E".bin" -N".dcu" -D"RELEASE" -I%IPATH% -U%UPATH% -O%MORMOT% -$C- -$D- -$L- -$Y- 

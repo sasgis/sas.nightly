@@ -6,7 +6,7 @@ if "%XE2%" == "1" (
   set BDS_VER=9.0
   set AL_NAME=alcinoe
 ) else (
-  set BDS_VER=20.0
+  set BDS_VER=21.0
   set AL_NAME=alcinoe-code
 )
 
@@ -44,8 +44,8 @@ cd %SRC%
 
 SET ALIAS=Generics.Collections=System.Generics.Collections;Generics.Defaults=System.Generics.Defaults;WinTypes=Windows;WinProcs=Windows;DbiTypes=BDE;DbiProcs=BDE;DbiErrs=BDE
 
-SET NAMESPASE=System.Win;Data.Win;Datasnap.Win;Web.Win;Soap.Win;Xml.Win;Bde;Vcl;Vcl.Imaging;Vcl.Touch;Vcl.Samples;Vcl.Shell;System;Xml;Data;Datasnap;Web;Soap;Winapi;
+SET NAMESPASE=System.Win;Data.Win;Datasnap.Win;Web.Win;Soap.Win;Xml.Win;Bde;Vcl;Vcl.Imaging;Vcl.Touch;Vcl.Samples;Vcl.Shell;System;Xml;Data;Datasnap;Web;Soap;Winapi;VclTee;
 
-DCC32.EXE --no-config -B -TX.exe -A%ALIAS% -NS%NAMESPASE% -E".bin" -N".dcu" -GD -D"DEBUG;EUREKALOG;EUREKALOG_VER6" -I%IPATH% -U%UPATH% -O%MORMOT% SASPlanet.dpr
+DCC32.EXE --no-config -B -TX.exe -A%ALIAS% -NS%NAMESPASE% -E".bin" -N".dcu" -M -GD -D"DEBUG;EUREKALOG;EUREKALOG_VER6" -I%IPATH% -U%UPATH% -O%MORMOT% SASPlanet.dpr
 @echo.
 ECC32.EXE --el_config"Tools\eurekalog\SASPlanet.eof" --el_alter_exe"SASPlanet.dpr"

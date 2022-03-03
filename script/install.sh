@@ -29,8 +29,8 @@ function install_bin {
 
 function install_delphi {
     
-    local fid="1JAPfka6bX_WNNc5-lE0b8OlBF5l7n_N4"
-    local fver="d20.191204"
+    local fid="12PudD427Rx6THTMYxvXclEcwk7lhB_Bh"
+    local fver="d21.220303"
     
     install_bin $fid $fver
 }
