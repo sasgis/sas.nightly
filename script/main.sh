@@ -41,7 +41,7 @@ if [ $? -eq 0 ]; then
             if [[ -f "$sas_bin_release_exe_file" && -f "$sas_bin_debug_exe_file" ]]; then
               compile_lang
               make_commits_log
-              add_external_dlls
+              add_dlls
               sas_arch="SAS.Planet.Nightly.${sas_date}.${UpdateRev}.7z"
               make_archive "${sas_uploads}/${sas_arch}"
               bitbucket_upload "${sas_uploads}" "${sas_arch}" >> "$upload_log" 2>&1
@@ -63,7 +63,7 @@ if [ $? -eq 0 ]; then
             if [[ -f "$sas_bin_debug_exe_file" && -f "$sas_bin_release_exe_file" ]]; then
               compile_lang
               make_commits_log
-              add_external_dlls
+              add_dlls
               make_archive "${sas_uploads}/SAS.Planet.${sas_date}.7z"
               log_end
               exit 1
@@ -78,7 +78,7 @@ if [ $? -eq 0 ]; then
             compile_debug
             if [[ -f "$sas_bin_debug_exe_file" ]]; then
               compile_lang
-              add_external_dlls
+              add_dlls
               make_archive "${sas_uploads}/SAS.Planet.Test.${sas_date}.7z"
               log_end
               exit 1

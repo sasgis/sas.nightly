@@ -44,6 +44,9 @@ function clear_sas_bin {
     rm -f $sas_bin_debug_exe_file
     rm -f $sas_bin_release_2007_exe_file
     rm -f $sas_bin_debug_2007_exe_file
+    
+    cd $sas_bin
+    rm -rfv *.dll
 }
 
 function prepare_version_info {
@@ -137,43 +140,42 @@ function make_archive {
     7z a -t7z -mmt1 -mx9 -md=64m -mfb=273 -ms=on "$1" -r * -xr!".*"
 }
 
-function get_external_dll {
-    
+function fetch_and_extract_dlls {
+
     local lib_zip=$1
     local lib_url=$2
-    local lib_dll=$3
     
     if [ ! -f $lib_zip ]; then
-        curl -v --retry 3 -L $lib_url --output $lib_zip
+        curl --retry 3 -L $lib_url --output $lib_zip
     fi
     
-    7z x -y $lib_zip -o"${sas_bin}" $lib_dll
+    7z x -y $lib_zip -o"${sas_bin}"
 }
 
-function add_external_dlls {
+function add_dlls {
 
-    local lib_v lib_zip lib_url
+    local lib_ver lib_zip lib_url
     
-    # libge
-    lib_v="20210717"
-    lib_zip="${work_dir}/cache/libge_${lib_v}.zip"
-    lib_url="https://bitbucket.org/greverse/greverse.bitbucket.org/downloads/libge_${lib_v}.zip"
+    # common
+    lib_ver="231224"
+    lib_zip="common-win32-v${lib_ver}.7z"
+    lib_url="https://github.com/sasgis/sas.planet.bin/releases/download/v.${lib_ver}-lib/${lib_zip}"
     
-    get_external_dll $lib_zip $lib_url "libge.dll leveldb.dll"
-
-    # libtz
-    lib_v="1.0.0"
-    lib_zip="${work_dir}/cache/libtz-${lib_v}-win32-fpc.zip"
-    lib_url="https://github.com/zedxxx/libtz/releases/download/v${lib_v}/libtz-${lib_v}-win32-fpc.zip"
+    fetch_and_extract_dlls "${work_dir}/cache/${lib_zip}" $lib_url
     
-    get_external_dll $lib_zip $lib_url "libtz.dll"
+    # libxp
+    lib_ver="231224"
+    lib_zip="libxp-win32-v${lib_ver}.7z"
+    lib_url="https://github.com/sasgis/sas.planet.bin/releases/download/v.${lib_ver}-lib/${lib_zip}"
     
-    # libosmscout_route
-    lib_v="v2.0.0"
-    lib_zip="${work_dir}/cache/libosmscout_route-${lib_v}-win32.zip"
-    lib_url="https://github.com/zedxxx/libosmscout-route/releases/download/${lib_v}/libosmscout_route-${lib_v}-win32.zip"
+    fetch_and_extract_dlls "${work_dir}/cache/${lib_zip}" $lib_url
     
-    get_external_dll $lib_zip $lib_url "libosmscout_route.dll"
+    # lib32
+    lib_ver="231224"
+    lib_zip="lib32-lite-win32-v${lib_ver}.7z"
+    lib_url="https://github.com/sasgis/sas.planet.bin/releases/download/v.${lib_ver}-lib/${lib_zip}"
+    
+    fetch_and_extract_dlls "${work_dir}/cache/${lib_zip}" $lib_url
 }
 
 function log_begin {
