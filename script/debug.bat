@@ -1,14 +1,7 @@
 cd ..\..\
 
-SET XE2=0
+SET BDS_VER=21.0
 
-if "%XE2%" == "1" (
-  set BDS_VER=9.0
-  set AL_NAME=alcinoe
-) else (
-  set BDS_VER=21.0
-  set AL_NAME=alcinoe-code
-)
 
 SET ROOT=%CD%
 SET BDS=%ROOT%\bin\delphi\%BDS_VER%
@@ -20,21 +13,18 @@ SET INC=%SRC%\includes
 SET ELOG=%ECC%\lib
 SET SRCINC=%INC%;%INC%\RarProgressBar;%INC%\Fundamentals;%INC%\BerkeleyDB;%INC%\LibJpeg;%INC%\FreeImage;%INC%\LibPng;%INC%\Compatibility;%INC%\LibTiff;%INC%\Proj4
 
-if "%XE2%" == "1" (
-  set SRCINC=%SRCINC%;%SRC%\Placeholders
-)
-
+SET CLIPPER2=%LIB%\clipper2\Delphi\Clipper2Lib
 SET GR32=%LIB%\graphics32\Source
 SET TBX=%LIB%\Toolbar2000\Source;%LIB%\TBX\Source;%LIB%\TBX\Source\Themes
 SET VSAGPS=%LIB%\vsagps\Public;%LIB%\vsagps\Runtime
 SET SYNEDIT=%LIB%\SynEdit\Source
 SET CCR=%LIB%\ccr-exif
 SET EWB=%LIB%\EmbeddedWB\source
-SET ALCINOE=%LIB%\%AL_NAME%\source
+SET ALCINOE=%LIB%\Alcinoe-code\source
 SET PASCALSCRIPT=%LIB%\PascalScript\Source
 SET MORMOT=%LIB%\mORMot;%LIB%\mORMot\SQLite3
 
-SET IPATH=%ELOG%;%SRCINC%;%GR32%;%TBX%;%VSAGPS%;%SYNEDIT%;%CCR%;%EWB%;%ALCINOE%;%PASCALSCRIPT%;%MORMOT%
+SET IPATH=%ELOG%;%SRCINC%;%CLIPPER2%;%GR32%;%TBX%;%VSAGPS%;%SYNEDIT%;%CCR%;%EWB%;%ALCINOE%;%PASCALSCRIPT%;%MORMOT%
 SET UPATH=%BDS%\lib\win32\release;%IPATH%
 
 cd %SRC%\Resources
