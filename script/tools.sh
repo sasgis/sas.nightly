@@ -180,10 +180,10 @@ function add_dlls {
 
 function add_data {
 
-	if [ -d "${work_dir}/data" ]; then
-		cd "${work_dir}/data"
-		cp -prfv "./" "$sas_bin"
-	fi
+    if [ -d "${work_dir}/data" ]; then
+        cd "${work_dir}/data"
+        cp -prfv "./" "$sas_bin"
+    fi
 }
 
 function log_begin {
