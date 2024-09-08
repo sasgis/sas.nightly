@@ -42,8 +42,6 @@ function clear_sas_bin {
 
     rm -f $sas_bin_release_exe_file
     rm -f $sas_bin_debug_exe_file
-    rm -f $sas_bin_release_2007_exe_file
-    rm -f $sas_bin_debug_2007_exe_file
     
     cd $sas_bin
     rm -rfv *.dll
@@ -89,7 +87,9 @@ function compile_project {
     cmd.exe /c "$bat" > "$log" 2>&1
     
     if [ -f "$sas_exe_file" ]; then
-        cp -u -f "$sas_exe_file" "$compiled_exe_name"
+        cp -f "$sas_exe_file" "$compiled_exe_name"
+        # cp -f "$sas_map_file" "${compiled_exe_name/.exe/.map}"
+        
         rm -f $sas_exe_file
         rm -f $sas_map_file
     fi

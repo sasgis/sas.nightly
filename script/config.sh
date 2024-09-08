@@ -13,11 +13,9 @@ tmp=$work_dir/tmp
 sas_date=$(date "+%y%m%d")
 sas_src=$tmp/src
 sas_bin=$tmp/bin
-sas_bin_release_2007_exe_file=$sas_bin/SASPlanet.NonUnicode.exe
-sas_bin_debug_2007_exe_file=$sas_bin/SASPlanet.NonUnicode.Debug.exe
 sas_bin_release_exe_file=$sas_bin/SASPlanet.exe
 sas_bin_debug_exe_file=$sas_bin/SASPlanet.Debug.exe
-sas_maps=$sas_bin/Maps/sas.maps
+# sas_maps=$sas_bin/Maps/sas.maps
 sas_lang=$tmp/lang
 sas_lib=$tmp/lib
 
@@ -35,8 +33,6 @@ cur_log_folder=$sas_log/$log_date
 
 release_log=$cur_log_folder/Compile.Release.log
 debug_log=$cur_log_folder/Compile.Debug.log
-release_2007_log=$cur_log_folder/Compile.2007.Release.log
-debug_2007_log=$cur_log_folder/Compile.2007.Debug.log
 upload_log=$cur_log_folder/Upload.log
 
 sas_exe_file=$sas_src/.bin/SASPlanet.exe
