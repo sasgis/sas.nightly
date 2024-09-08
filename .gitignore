@@ -6,3 +6,4 @@ tmp/**
 upload/**
 
 script/bintray_config.sh
+/data/*

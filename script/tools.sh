@@ -178,6 +178,14 @@ function add_dlls {
     fetch_and_extract_dlls "${work_dir}/cache/${lib_zip}" $lib_url
 }
 
+function add_data {
+
+	if [ -d "${work_dir}/data" ]; then
+		cd "${work_dir}/data"
+		cp -prfv "./" "$sas_bin"
+	fi
+}
+
 function log_begin {
 
     echo "Start at: " $(date "+%Y-%m-%d %H:%M:%S")
