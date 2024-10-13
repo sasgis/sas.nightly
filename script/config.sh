@@ -25,7 +25,8 @@ sas_build_info_path=$sas_src/Resources/BuildInfo
 sas_build_info_file=BuildInfo.csv
 sas_uploads=$work_dir/upload
 
-sas_eurekalog_pas=$sas_src/Tools/eurekalog/EurekaLog.pas
+sas_eurekalog_pas=$sas_src/Tools/eurekalog/u_EurekaLog.pas
+sas_madexcept_pas=$sas_src/Tools/madexcept/u_MadExcept.pas
 
 sas_log=$work_dir/log
 log_date=$(date "+%Y-%m-%d %H-%M-%S")

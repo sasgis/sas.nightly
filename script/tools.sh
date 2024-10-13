@@ -83,8 +83,9 @@ function compile_project {
     local bat=$work_dir/script/$1
     local log=$2
     local compiled_exe_name=$3
+    local debug_em=$4
     
-    cmd.exe /c "$bat" > "$log" 2>&1
+    cmd.exe /c "$bat $debug_em" > "$log" 2>&1
     
     if [ -f "$sas_exe_file" ]; then
         cp -f "$sas_exe_file" "$compiled_exe_name"
@@ -98,17 +99,32 @@ function compile_project {
 function compile_release {
 
     cd $sas_src
-    compile_project "release.bat" "$release_log" "$sas_bin_release_exe_file"    
+    compile_project "release.bat" "$release_log" "$sas_bin_release_exe_file" "RELEASE"    
+}
+
+function compile_debug_el {
+
+    cd $sas_src
+    cp -f "$sas_eurekalog_pas" "$sas_src"
+    sed -bi "s/^uses/uses u_EurekaLog,/i" "$sas_src/SASPlanet.dpr"
+    compile_project "debug.bat" "$debug_log" "$sas_bin_debug_exe_file" "EL"
+    
+    sed -bi "s/^uses u_EurekaLog,/uses/i" "$sas_src/SASPlanet.dpr"
+}
+
+function compile_debug_me {
+
+    cd $sas_src
+    cp -f "$sas_madexcept_pas" "$sas_src"
+    sed -bi "s/^uses/uses u_MadExcept,/i" "$sas_src/SASPlanet.dpr"
+    compile_project "debug.bat" "$debug_log" "$sas_bin_debug_exe_file" "ME"
+    
+    sed -bi "s/^uses u_MadExcept,/uses/i" "$sas_src/SASPlanet.dpr"
 }
 
 function compile_debug {
 
-    cd $sas_src
-    cp -f "$sas_eurekalog_pas" "$sas_src"
-    sed -bi "s/^uses/uses EurekaLog,/i" "$sas_src/SASPlanet.dpr"
-    compile_project "debug.bat" "$debug_log" "$sas_bin_debug_exe_file"
-    
-    sed -bi "s/^uses EurekaLog,/uses/i" "$sas_src/SASPlanet.dpr"
+    compile_debug_me
 }
 
 function make_commits_log {
