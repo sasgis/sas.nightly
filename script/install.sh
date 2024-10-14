@@ -43,6 +43,14 @@ function install_el {
     install_bin $fid $fver
 }
 
+function install_me {
+    
+    local fid="1L_jlSYxy9YDQqVfpoCPSU-KUIR8_42FV"
+    local fver="me515.d21.241014"
+    
+    install_bin $fid $fver
+}
+
 function install_gettext {
     
     local fid="1UtWPFDiaabAH55nWunJZFqhsKj1urwZi"
@@ -52,5 +60,5 @@ function install_gettext {
 }
 
 install_delphi
-install_el
+install_me
 install_gettext
