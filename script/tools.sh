@@ -173,21 +173,21 @@ function add_dlls {
     local lib_ver lib_zip lib_url
     
     # common
-    lib_ver="240219"
+    lib_ver="241111"
     lib_zip="common-win32-v${lib_ver}.7z"
     lib_url="https://github.com/sasgis/sas.planet.bin/releases/download/v.${lib_ver}-lib/${lib_zip}"
     
     fetch_and_extract_dlls "${work_dir}/cache/${lib_zip}" $lib_url
     
     # libxp
-    lib_ver="240219"
+    lib_ver="241111"
     lib_zip="libxp-win32-v${lib_ver}.7z"
     lib_url="https://github.com/sasgis/sas.planet.bin/releases/download/v.${lib_ver}-lib/${lib_zip}"
     
     fetch_and_extract_dlls "${work_dir}/cache/${lib_zip}" $lib_url
     
     # lib32
-    lib_ver="240219"
+    lib_ver="241111"
     lib_zip="lib32-lite-win32-v${lib_ver}.7z"
     lib_url="https://github.com/sasgis/sas.planet.bin/releases/download/v.${lib_ver}-lib/${lib_zip}"
     
