@@ -85,7 +85,7 @@ function compile_project {
     local compiled_exe_name=$3
     local debug_em=$4
     
-    cmd.exe /c "$bat $debug_em $work_platform" > "$log" 2>&1
+    cmd.exe /c "$bat $debug_em $work_platform" 2>&1 | tee "$log"
     
     if [ -f "$sas_exe_file" ]; then
         cp -f "$sas_exe_file" "$compiled_exe_name"
@@ -142,7 +142,7 @@ function compile_lang {
     
     cd $sas_lang
     
-    PATH="$work_dir/bin/gnugettext:$PATH"
+    PATH="${work_dir}/bin/gnugettext:$PATH"
 
     msgfmt "$sas_ru_po" -o "$bin_ru_mo"
     msgfmt "$sas_fr_po" -o "$bin_fr_mo"
