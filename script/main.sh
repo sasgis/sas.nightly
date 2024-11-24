@@ -40,8 +40,11 @@ fi
 prepare_version_info "$UpdateRev"
 prepare_build_info "1,$sas_date,$build_type,$UpdateRev,$UpdateNode,$ReqRev,$ReqNode"
 
+echo "Compiling release build..."
 compile_release
 clear_tmp
+
+echo "Compiling debug build..."
 compile_debug
 
 if [[ -f "$sas_bin_release_exe_file" && -f "$sas_bin_debug_exe_file" ]]; then
@@ -52,26 +55,28 @@ if [[ -f "$sas_bin_release_exe_file" && -f "$sas_bin_debug_exe_file" ]]; then
     add_data
     
     sas_arch="SAS.Planet.${build_type}.${sas_date}.${UpdateRev}.x${work_platform}.7z"
+    
+    echo "Creating archive: ${sas_arch}"
     make_archive "${sas_uploads}/${sas_arch}"
   
     if [ "$work_type" = "NIGHTLY" ]; then
 
         if [ $work_platform -eq 32 ]; then 
             sas_upload="SAS.Planet.${build_type}.${sas_date}.${UpdateRev}.7z"
-            cp -f -v sas_arch sas_upload
+            echo "Prepare temporary archive: ${sas_upload}"
+            cp -f -v "${sas_uploads}/${sas_arch}" "${sas_uploads}/${sas_upload}"
         else
-            sas_upload=sas_arch
+            sas_upload=$sas_arch
         fi
         
-        # upload Nightly build
-        bitbucket_upload "${sas_uploads}" "${sas_upload}" >> "$upload_log" 2>&1
+        echo "Uploading Nightly build..."
+        bitbucket_upload "${sas_uploads}" "${sas_upload}" >> "${upload_log}" 2>&1
         
         if [ $work_platform -eq 32 ]; then
-            rm -f -v $sas_upload
+            echo "Remove temporary archive: ${sas_upload}"
+            rm -f -v "${sas_uploads}/${sas_upload}"
         fi
     fi
-  
-    clear_sas_bin
   
     log_end
     exit 1

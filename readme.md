@@ -22,4 +22,4 @@
 
 - В папке `./data/` в подпапках `common`, `win32` и `win64` можно разместить любые дополнительные папки/файлы, которые будут добавлены в готовый архив. Добавление производится в корень архива, с сохранением структуры директорий.
 
-- Вспомогательные утилиты: [bysybox](https://frippery.org/busybox/index.html#downloads), [7zip](https://www.7-zip.org/) и [curl](https://curl.se/windows/) обновлять вручную (при необходимости).
+- Вспомогательные утилиты: [busybox](https://frippery.org/busybox/index.html#downloads), [7zip](https://www.7-zip.org/) и [curl](https://curl.se/windows/) обновлять вручную (при необходимости).
