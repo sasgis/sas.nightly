@@ -29,13 +29,13 @@ function clear_tmp {
     rm -f $bin_tr_mo
     
     cd $sas_uploads
-    rm -f *.7z
+    rm -f *.x${work_platform}.7z
     
     cd $sas_dcu
     rm -f *.dcu
     
     cd $sas_log
-    rm -f *.7z
+    rm -f *_x${work_platform}.7z
 }
 
 function clear_sas_bin {
@@ -85,7 +85,7 @@ function compile_project {
     local compiled_exe_name=$3
     local debug_em=$4
     
-    cmd.exe /c "$bat $debug_em" > "$log" 2>&1
+    cmd.exe /c "$bat $debug_em $work_platform" > "$log" 2>&1
     
     if [ -f "$sas_exe_file" ]; then
         cp -f "$sas_exe_file" "$compiled_exe_name"
@@ -99,7 +99,7 @@ function compile_project {
 function compile_release {
 
     cd $sas_src
-    compile_project "release.bat" "$release_log" "$sas_bin_release_exe_file" "RELEASE"    
+    compile_project "release.bat" "$release_log" "$sas_bin_release_exe_file" "RELEASE"
 }
 
 function compile_debug_el {
@@ -125,6 +125,7 @@ function compile_debug_me {
 function compile_debug {
 
     compile_debug_me
+    #compile_debug_el
 }
 
 function make_commits_log {
@@ -168,37 +169,65 @@ function fetch_and_extract_dlls {
     7z x -y $lib_zip -o"${sas_bin}"
 }
 
-function add_dlls {
+function add_dlls_32 {
 
     local lib_ver lib_zip lib_url
     
     # common
     lib_ver="241111"
     lib_zip="common-win32-v${lib_ver}.7z"
-    lib_url="https://github.com/sasgis/sas.planet.bin/releases/download/v.${lib_ver}-lib/${lib_zip}"
+    lib_url="https://github.com/sasgis/sas.planet.bin/releases/download/v.${lib_ver}/${lib_zip}"
     
     fetch_and_extract_dlls "${work_dir}/cache/${lib_zip}" $lib_url
     
     # libxp
     lib_ver="241111"
     lib_zip="libxp-win32-v${lib_ver}.7z"
-    lib_url="https://github.com/sasgis/sas.planet.bin/releases/download/v.${lib_ver}-lib/${lib_zip}"
+    lib_url="https://github.com/sasgis/sas.planet.bin/releases/download/v.${lib_ver}/${lib_zip}"
     
     fetch_and_extract_dlls "${work_dir}/cache/${lib_zip}" $lib_url
     
     # lib32
     lib_ver="241111"
     lib_zip="lib32-lite-win32-v${lib_ver}.7z"
-    lib_url="https://github.com/sasgis/sas.planet.bin/releases/download/v.${lib_ver}-lib/${lib_zip}"
+    lib_url="https://github.com/sasgis/sas.planet.bin/releases/download/v.${lib_ver}/${lib_zip}"
     
     fetch_and_extract_dlls "${work_dir}/cache/${lib_zip}" $lib_url
+}
+
+function add_dlls_64 {
+
+    local lib_ver lib_zip lib_url
+    
+    # common
+    lib_ver="241111"
+    lib_zip="common-win64-v${lib_ver}.7z"
+    lib_url="https://github.com/sasgis/sas.planet.bin/releases/download/v.${lib_ver}/${lib_zip}"
+    
+    fetch_and_extract_dlls "${work_dir}/cache/${lib_zip}" $lib_url
+    
+    # lib64
+    lib_ver="241111"
+    lib_zip="lib64-win64-v${lib_ver}.7z"
+    lib_url="https://github.com/sasgis/sas.planet.bin/releases/download/v.${lib_ver}/${lib_zip}"
+    
+    fetch_and_extract_dlls "${work_dir}/cache/${lib_zip}" $lib_url
+}
+
+function add_dlls {
+    
+    if [ $work_platform -eq 64 ]; then
+        add_dlls_64
+    else
+        add_dlls_32
+    fi
 }
 
 function add_data {
 
     if [ -d "${work_dir}/data" ]; then
-        cd "${work_dir}/data"
-        cp -prfv "./" "$sas_bin"
+        cd "${work_dir}/data/common" && cp -prfv "./" "$sas_bin"
+        cd "${work_dir}/data/win${work_platform}" && cp -prfv "./" "$sas_bin"
     fi
 }
 
@@ -216,7 +245,7 @@ function log_end {
         cp -f "main.log" "$cur_log_folder"
     fi
         
-    7z a -t7z -ms=on "${cur_log_folder}.7z" -r "${cur_log_folder}/*"
+    7z a -t7z -ms=on "${cur_log_folder}_x${work_platform}.7z" -r "${cur_log_folder}/*"
         
     rm -rf "$cur_log_folder"
 }

@@ -29,36 +29,37 @@ function install_bin {
 
 function install_delphi {
     
-    local fid="12PudD427Rx6THTMYxvXclEcwk7lhB_Bh"
-    local fver="d21.220303"
+    local fid="1CVWMgsQLXjs17P3QQu-k3hrdVTiC2DSc"
+    local fver="d21.241124"
     
     install_bin $fid $fver
 }
 
 function install_el {
     
-    local fid="1Hf_xVItd5iyp4FNLzeudza0NWCnKA49o"
-    local fver="el6.190613"
+    local fid="1s43wgdmRP-Bf-9V0puYWEFlWl5KzGqlB"
+    local fver="el713.d21.241124"
     
     install_bin $fid $fver
 }
 
 function install_me {
     
-    local fid="1L_jlSYxy9YDQqVfpoCPSU-KUIR8_42FV"
-    local fver="me515.d21.241014"
+    local fid="1ddicVhJrNn0TdiuBcW_5hu-toKl4C6QT"
+    local fver="me515.d21.241124"
     
     install_bin $fid $fver
 }
 
-function install_gettext {
+function install_gnugettext {
     
-    local fid="1UtWPFDiaabAH55nWunJZFqhsKj1urwZi"
-    local fver="ggt.190713"
+    local fid="1xwhBUSfVGHcxA76LuK51Jc6CfWJhgSxh"
+    local fver="ggt225.241124"
     
     install_bin $fid $fver
 }
 
 install_delphi
 install_me
-install_gettext
+install_el
+install_gnugettext

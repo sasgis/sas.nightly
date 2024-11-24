@@ -1,9 +1,8 @@
 #!/bin/bash -ex
 
-# initialize
-
 work_dir=$1
 work_type=$2
+work_platform=$3
 
 . ./script/config.sh
 . ./script/repositories.sh
@@ -13,87 +12,72 @@ work_type=$2
 log_begin
 
 if [ $? -ne 0 ]; then
-    echo -e "Error: Cant't initialize Helper"
+    echo -e "Error: Can't initialize scripts!"
     log_end
-    exit 2
+    exit $?
 fi
 
-# Prepare self folders
 create_folders
-
-# Update repositories
 pull_changes
 
-# Clear all tempary data
 clear_tmp
 clear_sas_bin
 
-if [ $? -eq 0 ]; then
-    if [ "$work_type" = "NIGHTLY" ]; then
-        if [ "$LocalNode" -eq "$UpdateNode" ]; then
-            echo -e "Hint: No updates found\n"
-        else
-            prepare_version_info "$UpdateRev"
-            prepare_build_info "1,$sas_date,Nightly,$UpdateRev,$UpdateNode,$ReqRev,$ReqNode"
-            compile_release
-            clear_tmp
-            compile_debug
-            if [[ -f "$sas_bin_release_exe_file" && -f "$sas_bin_debug_exe_file" ]]; then
-              compile_lang
-              make_commits_log
-              add_dlls
-              add_data
-              sas_arch="SAS.Planet.Nightly.${sas_date}.${UpdateRev}.7z"
-              make_archive "${sas_uploads}/${sas_arch}"
-              bitbucket_upload "${sas_uploads}" "${sas_arch}" >> "$upload_log" 2>&1
-              log_end
-              exit 1
-            else
-              echo -e "Compile error! For details see compile log."
-              log_end
-              exit 2
-            fi
-        fi
-    else
-        if [ "$work_type" = "RELEASE" ]; then
-            prepare_version_info "$UpdateRev"
-            prepare_build_info "1,$sas_date,Stable,$UpdateRev,$UpdateNode,$ReqRev,$ReqNode"
-            compile_release
-            clear_tmp
-            compile_debug
-            if [[ -f "$sas_bin_debug_exe_file" && -f "$sas_bin_release_exe_file" ]]; then
-              compile_lang
-              make_commits_log
-              add_dlls
-              add_data
-              make_archive "${sas_uploads}/SAS.Planet.${sas_date}.7z"
-              log_end
-              exit 1
-            else
-              echo -e "Compile error! For details see compile log."
-              log_end
-              exit 2
-            fi
-        else
-            prepare_version_info "$UpdateRev"
-            prepare_build_info "1,$sas_date,Test,$UpdateRev,$UpdateNode,$ReqRev,$ReqNode"
-            compile_debug
-            if [[ -f "$sas_bin_debug_exe_file" ]]; then
-              compile_lang
-              add_dlls
-              add_data
-              make_archive "${sas_uploads}/SAS.Planet.Test.${sas_date}.7z"
-              log_end
-              exit 1
-            else
-              echo -e "Compile error! For details see compile log."
-              log_end
-              exit 2
-            fi    
-        fi
-    fi
+if [ $? -ne 0 ]; then
+    echo -e "Error: Prepare steps failed!"
+    log_end
+    exit $?
+fi
+    
+if [ "$work_type" = "NIGHTLY" ]; then
+    build_type="Nightly"
+elif [ "$work_type" = "RELEASE" ]; then
+    build_type="Stable"
+else
+    build_type="Test"
 fi
 
-log_end
+prepare_version_info "$UpdateRev"
+prepare_build_info "1,$sas_date,$build_type,$UpdateRev,$UpdateNode,$ReqRev,$ReqNode"
 
-exit $?
+compile_release
+clear_tmp
+compile_debug
+
+if [[ -f "$sas_bin_release_exe_file" && -f "$sas_bin_debug_exe_file" ]]; then
+    
+    compile_lang
+    make_commits_log
+    add_dlls
+    add_data
+    
+    sas_arch="SAS.Planet.${build_type}.${sas_date}.${UpdateRev}.x${work_platform}.7z"
+    make_archive "${sas_uploads}/${sas_arch}"
+  
+    if [ "$work_type" = "NIGHTLY" ]; then
+
+        if [ $work_platform -eq 32 ]; then 
+            sas_upload="SAS.Planet.${build_type}.${sas_date}.${UpdateRev}.7z"
+            cp -f -v sas_arch sas_upload
+        else
+            sas_upload=sas_arch
+        fi
+        
+        # upload Nightly build
+        bitbucket_upload "${sas_uploads}" "${sas_upload}" >> "$upload_log" 2>&1
+        
+        if [ $work_platform -eq 32 ]; then
+            rm -f -v $sas_upload
+        fi
+    fi
+  
+    clear_sas_bin
+  
+    log_end
+    exit 1
+else
+    echo -e "Compile error! See Compile log for details."
+    log_end
+    exit 2
+fi
+    

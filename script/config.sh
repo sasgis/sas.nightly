@@ -29,7 +29,7 @@ sas_eurekalog_pas=$sas_src/Tools/eurekalog/u_EurekaLog.pas
 sas_madexcept_pas=$sas_src/Tools/madexcept/u_MadExcept.pas
 
 sas_log=$work_dir/log
-log_date=$(date "+%Y-%m-%d %H-%M-%S")
+log_date=$(date "+%Y-%m-%d_%H-%M-%S")
 cur_log_folder=$sas_log/$log_date
 
 release_log=$cur_log_folder/Compile.Release.log

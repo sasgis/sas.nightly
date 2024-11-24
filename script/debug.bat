@@ -1,17 +1,38 @@
+
+:: ---------- Compiler version setup ----------
+
+set BDS_VER=21.0
+set EL_IDE_VER=27
+
+:: --------------------------------------------
+
 cd ..\..\
 
 set ROOT=%CD%
 set EMANAGER="%1%"
+set TARGET="%2%"
 
-set BDS_VER=21.0
+if %TARGET%=="64" (goto platform_x64) else (goto platform_x32)
+
+:platform_x32
+set PLATFORM=32
+set DCC=dcc32.exe
+goto platform_end
+
+:platform_x64
+set PLATFORM=64
+set DCC=dcc64.exe
+goto platform_end
+
+:platform_end
 
 if %EMANAGER%=="EL" (goto el) else (goto me)
 
 :el
 echo "Debug build with EurekaLog"
-set EROOT=%ROOT%\bin\eurekalog\%BDS_VER%
+set EROOT=%ROOT%\bin\eurekalog
 set ERES=%EROOT%\lib\Common
-set ELIB=%EROOT%\lib\Win32\Release\Studio27
+set ELIB=%EROOT%\lib\win%PLATFORM%\Release\Studio%EL_IDE_VER%
 set EDEF=EUREKALOG;EUREKALOG_VER7
 goto start
 
@@ -19,7 +40,7 @@ goto start
 echo "Debug build with madExcept"
 set EROOT=%ROOT%\bin\madexcept\%BDS_VER%
 set ERES=%EROOT%\lib
-set ELIB=%EROOT%\lib
+set ELIB=%EROOT%\lib\win%PLATFORM%
 set EDEF=MADEXCEPT
 goto start
 
@@ -44,7 +65,7 @@ set PASCALSCRIPT=%LIB%\PascalScript\Source
 set MORMOT=%LIB%\mORMot;%LIB%\mORMot\SQLite3
 
 set IPATH=%ELIB%;%SRCINC%;%CLIPPER2%;%GR32%;%TBX%;%VSAGPS%;%SYNEDIT%;%CCR%;%EWB%;%ALCINOE%;%PASCALSCRIPT%;%MORMOT%
-set UPATH=%BDS%\lib\win32\release;%IPATH%
+set UPATH=%BDS%\lib\win%PLATFORM%\release;%IPATH%
 set OPATH=%MORMOT%
 set RPATH=%ERES%
 
@@ -54,14 +75,14 @@ call Build.Resources.cmd
 cd %SRC%
 
 set ALIAS=Generics.Collections=System.Generics.Collections;Generics.Defaults=System.Generics.Defaults;WinTypes=Windows;WinProcs=Windows;DbiTypes=BDE;DbiProcs=BDE;DbiErrs=BDE
-set NAMESPASE=System.Win;Data.Win;Datasnap.Win;Web.Win;Soap.Win;Xml.Win;Bde;Vcl;Vcl.Imaging;Vcl.Touch;Vcl.Samples;Vcl.Shell;System;Xml;Data;Datasnap;Web;Soap;Winapi;VclTee;
+set NAMESPASE=System.Win;Data.Win;Datasnap.Win;Web.Win;Soap.Win;Xml.Win;Bde;Vcl;Vcl.Imaging;Vcl.Touch;Vcl.Samples;Vcl.Shell;System;Xml;Data;Datasnap;Web;Soap;Winapi;VclTee
 
-dcc32.exe --no-config -B -TX.exe -A"%ALIAS%" -NS"%NAMESPASE%" -E".bin" -N".dcu" -M -GD -$O- -$W+ -$D+ -D"DEBUG;%EDEF%" -I"%IPATH%" -U"%UPATH%" -O"%OPATH%" -R"%RPATH%" --peosversion:5.0 --pesubsysversion:5.0 SASPlanet.dpr
+%DCC% --no-config -B -CG -TX.exe -A"%ALIAS%" -NS"%NAMESPASE%" -E".bin" -N".dcu" -M -GD -$O- -$W+ -$D+ -D"DEBUG;%EDEF%" -I"%IPATH%" -U"%UPATH%" -O"%OPATH%" -R"%RPATH%" --peosversion:5.0 --pesubsysversion:5.0 SASPlanet.dpr
 
 @echo.
 
 if %EMANAGER%=="EL" (
-  ecc32.exe --el_ide=27 --el_mode=Delphi "--el_config=.\Tools\eurekalog\SASPlanet.eof" "--el_alter_exe=SASPlanet.dpr;.\.bin\SASPlanet.exe"
+  ecc32.exe --el_ide=%EL_IDE_VER% --el_mode=Delphi "--el_config=.\Tools\eurekalog\SASPlanet.eof" "--el_alter_exe=SASPlanet.dpr;.\.bin\SASPlanet.exe"
 ) else (
   madExceptPatch.exe ".\.bin\SASPlanet.exe" ".\Tools\madexcept\SASPlanet.mes"
 )
