@@ -22,20 +22,13 @@ function clear_tmp {
     rm -f $sas_exe_file
     rm -f $sas_map_file
     
-    rm -f $bin_ru_mo
-    rm -f $bin_fr_mo
-    rm -f $bin_uk_mo
-    rm -f $bin_es_mo
-    rm -f $bin_tr_mo
+    cd "$sas_bin/lang" && rm -f *.mo
     
-    cd $sas_uploads
-    rm -f *.x${work_platform}.7z
+    cd $sas_uploads && rm -f *.x${work_platform}.7z
     
-    cd $sas_dcu
-    rm -f *.dcu
+    cd $sas_dcu && rm -f *.dcu
     
-    cd $sas_log
-    rm -f *_x${work_platform}.7z
+    cd $sas_log && rm -f *_x${work_platform}.7z
 }
 
 function clear_sas_bin {
@@ -43,8 +36,7 @@ function clear_sas_bin {
     rm -f $sas_bin_release_exe_file
     rm -f $sas_bin_debug_exe_file
     
-    cd $sas_bin
-    rm -rfv *.dll
+    cd $sas_bin && rm -rfv *.dll
 }
 
 function prepare_version_info {
@@ -136,19 +128,21 @@ function make_commits_log {
 
 function compile_lang {
 
-    if [ ! -d "$sas_bin/lang" ]; then
-        mkdir "$sas_bin/lang"
+    local lang_bin="$sas_bin/lang"
+    
+    if [ ! -d "${lang_bin}" ]; then
+        mkdir "${lang_bin}"
     fi
     
-    cd $sas_lang
+    cd "${sas_lang}"
     
     PATH="${work_dir}/bin/gnugettext:$PATH"
-
-    msgfmt "$sas_ru_po" -o "$bin_ru_mo"
-    msgfmt "$sas_fr_po" -o "$bin_fr_mo"
-    msgfmt "$sas_uk_po" -o "$bin_uk_mo"
-    msgfmt "$sas_es_po" -o "$bin_es_mo"
-    msgfmt "$sas_tr_po" -o "$bin_tr_mo"
+    
+    # do not surround $sas_langs with qoutes bellow!
+    for lang in $sas_langs ; do
+        echo "Compiling language file: ${lang}"
+        msgfmt "${sas_lang}/${lang}.po" -o "${lang_bin}/${lang}.mo"
+    done
 }
 
 function make_archive {
