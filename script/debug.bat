@@ -82,7 +82,7 @@ set NAMESPASE=System.Win;Data.Win;Datasnap.Win;Web.Win;Soap.Win;Xml.Win;Bde;Vcl;
 @echo.
 
 if %EMANAGER%=="EL" (
-  ecc32.exe --el_ide=%EL_IDE_VER% --el_mode=Delphi "--el_config=.\Tools\eurekalog\SASPlanet.eof" "--el_alter_exe=SASPlanet.dpr;.\.bin\SASPlanet.exe"
+  ecc32.exe --el_ide=%EL_IDE_VER% --el_mode=Delphi "--el_config=.\Tools\Build\eurekalog\SASPlanet.eof" "--el_alter_exe=SASPlanet.dpr;.\.bin\SASPlanet.exe"
 ) else (
-  madExceptPatch.exe ".\.bin\SASPlanet.exe" ".\Tools\madexcept\SASPlanet.mes"
+  madExceptPatch.exe ".\.bin\SASPlanet.exe" ".\Tools\Build\madexcept\SASPlanet.mes"
 )
