@@ -1,6 +1,13 @@
 #!/bin/bash -ex
 
-. ./script/gdrive_dl.sh
+function google_drive_download {
+
+    local fid="$1"
+    local fname="$2"
+    local fcookie="$3"
+
+    curl --ssl-no-revoke -L "https://drive.usercontent.google.com/download?id=${fid}&export=download&confirm=y" -o ${fname}
+}
 
 function install_bin {
     
@@ -17,7 +24,7 @@ function install_bin {
         fi
         if [ -f "${fname}" ]; then
             7z x -y -p"sasgis" ${fname} -o"${out}"
-            echo $(date "+%y%m%d") > "${txt}"
+            echo $(date +"%y%m%d") > "${txt}"
             echo -e "\nInstalled: ${fver}"
         else
             echo -e "\nDownload failed: ${fver}"

@@ -1,7 +1,5 @@
 #!/bin/bash -ex
 
-. ./script/config.sh
-
 function check_state {
 
     cd $tmp
@@ -21,10 +19,6 @@ function check_state {
     if [ ! -d $sas_lang ]; then
         git clone "$proj_lang" $sas_lang
     fi
-    
-    # if [ ! -d $sas_maps ]; then
-    #     git clone "$proj_maps" $sas_maps
-    # fi    
 }
 
 function update_git_repo {
@@ -56,9 +50,6 @@ function pull_changes {
     echo -e "\nUpdate sas.release:"
     update_git_repo $sas_bin
 
-    # echo -e "\nUpdate sas.maps:"
-    # update_git_repo $sas_maps
-        
     echo -e "\nUpdate sas.src:"
     cd $sas_src
     if [ "$work_type" = "NIGHTLY" ]; then

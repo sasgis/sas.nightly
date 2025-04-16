@@ -23,12 +23,18 @@ function clear_tmp {
     rm -f $sas_map_file
     
     cd "$sas_bin/lang" && rm -f *.mo
-    
-    cd $sas_uploads && rm -f *.x${work_platform}.7z
-    
+
     cd $sas_dcu && rm -f *.dcu
-    
-    cd $sas_log && rm -f *_x${work_platform}.7z
+}
+
+function clear_uploads {
+
+    cd $sas_uploads && rm -v -f SAS.Planet.*.7z
+}
+
+function clear_logs {
+
+    cd $sas_log && rm -f *.7z
 }
 
 function clear_sas_bin {
@@ -43,9 +49,9 @@ function prepare_version_info {
 
     cd $sas_version_info_path
 
-    local vi_year=$(echo $(date "+%y") | awk '{ gsub("^0",""); print }')
-    local vi_month=$(echo $(date "+%m") | awk '{ gsub("^0",""); print }')
-    local vi_day=$(echo $(date "+%d") | awk '{ gsub("^0",""); print }')
+    local vi_year=$(echo $(date +"%y") | awk '{ gsub("^0",""); print }')
+    local vi_month=$(echo $(date +"%m") | awk '{ gsub("^0",""); print }')
+    local vi_day=$(echo $(date +"%d") | awk '{ gsub("^0",""); print }')
     local vi_rev=$(echo $1 | awk '{ gsub("^0",""); print }')
 
     local version_info=$vi_year","$vi_month","$vi_day","$vi_rev
@@ -227,12 +233,12 @@ function add_data {
 
 function log_begin {
 
-    echo "Start at: " $(date "+%Y-%m-%d %H:%M:%S")
+    echo "Start at: $(date +"%Y-%m-%d %H:%M:%S")"
 }
 
 function log_end {
 
-    echo "Finish at: " $(date "+%Y-%m-%d %H:%M:%S")
+    echo "Finish at: $(date +"%Y-%m-%d %H:%M:%S")"
 
     cd $sas_log
     if [ -f "main.log" ]; then
