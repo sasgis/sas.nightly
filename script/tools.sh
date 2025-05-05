@@ -174,22 +174,22 @@ function add_dlls_32 {
     local lib_ver lib_zip lib_url
     
     # common
-    lib_ver="241111"
-    lib_zip="common-win32-v${lib_ver}.7z"
+    lib_ver="250505"
+    lib_zip="common-win32-v${lib_ver}.zip"
     lib_url="https://github.com/sasgis/sas.planet.bin/releases/download/v.${lib_ver}/${lib_zip}"
     
     fetch_and_extract_dlls "${work_dir}/cache/${lib_zip}" $lib_url
     
     # libxp
-    lib_ver="241111"
-    lib_zip="libxp-win32-v${lib_ver}.7z"
+    lib_ver="250505"
+    lib_zip="libxp-win32-v${lib_ver}.zip"
     lib_url="https://github.com/sasgis/sas.planet.bin/releases/download/v.${lib_ver}/${lib_zip}"
     
     fetch_and_extract_dlls "${work_dir}/cache/${lib_zip}" $lib_url
     
     # lib32
-    lib_ver="241111"
-    lib_zip="lib32-lite-win32-v${lib_ver}.7z"
+    lib_ver="250505"
+    lib_zip="lib32-lite-win32-v${lib_ver}.zip"
     lib_url="https://github.com/sasgis/sas.planet.bin/releases/download/v.${lib_ver}/${lib_zip}"
     
     fetch_and_extract_dlls "${work_dir}/cache/${lib_zip}" $lib_url
@@ -200,15 +200,15 @@ function add_dlls_64 {
     local lib_ver lib_zip lib_url
     
     # common
-    lib_ver="241111"
-    lib_zip="common-win64-v${lib_ver}.7z"
+    lib_ver="250505"
+    lib_zip="common-win64-v${lib_ver}.zip"
     lib_url="https://github.com/sasgis/sas.planet.bin/releases/download/v.${lib_ver}/${lib_zip}"
     
     fetch_and_extract_dlls "${work_dir}/cache/${lib_zip}" $lib_url
     
     # lib64
-    lib_ver="241111"
-    lib_zip="lib64-win64-v${lib_ver}.7z"
+    lib_ver="250505"
+    lib_zip="lib64-win64-v${lib_ver}.zip"
     lib_url="https://github.com/sasgis/sas.planet.bin/releases/download/v.${lib_ver}/${lib_zip}"
     
     fetch_and_extract_dlls "${work_dir}/cache/${lib_zip}" $lib_url
