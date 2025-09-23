@@ -78,10 +78,11 @@ function do_upload {
     if [ -f "${sas_uploads}/${ARCHIVE_32}" ] && [ -f "${sas_uploads}/${ARCHIVE_64}" ]; then
         
         # Bitbucket
-        echo "Uploading Nightly builds to Bitbucket..."
-        source "${work_dir}/script/upload-nightly-bitbucket.sh"
-        bitbucket_upload "${sas_uploads}" "${ARCHIVE_64}" >> "${upload_log}" 2>&1
-        bitbucket_upload "${sas_uploads}" "${ARCHIVE_32}" >> "${upload_log}" 2>&1
+        # A workspace on a Free plan does not support uploading or downloading files
+        #echo "Uploading Nightly builds to Bitbucket..."
+        #source "${work_dir}/script/upload-nightly-bitbucket.sh"
+        #bitbucket_upload "${sas_uploads}" "${ARCHIVE_64}" >> "${upload_log}" 2>&1
+        #bitbucket_upload "${sas_uploads}" "${ARCHIVE_32}" >> "${upload_log}" 2>&1
         
         # GitHub
         echo "Uploading Nightly builds to GitHub..."
