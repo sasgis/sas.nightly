@@ -15,7 +15,7 @@ function install_bin {
     local fver="$2"
     
     local out="./bin/"
-    local txt="./info/${fver}.txt"    
+    local txt="./info/${fver}.txt"
     local fname="./cache/${fver}.7z"
     
     if [ ! -f "${txt}" ]; then
@@ -40,6 +40,11 @@ function install_delphi {
     local fver="d21.241124"
     
     install_bin $fid $fver
+    
+    local fid="1yQH4UseHKoWP6vtJadNsnuX3h0IXH30y"
+    local fver="d37.250923"
+    
+    install_bin $fid $fver
 }
 
 function install_el {
@@ -52,8 +57,13 @@ function install_el {
 
 function install_me {
     
-    local fid="1ddicVhJrNn0TdiuBcW_5hu-toKl4C6QT"
-    local fver="me515.d21.241124"
+    local fid="1GxkAzprYHtI4D-8y3mb928J_tko3T3ah"
+    local fver="me520.d21.250923"
+    
+    install_bin $fid $fver
+    
+    local fid="1GHrbdgc5LhVfVYQDpMdD4wqH5TXnZRU8"
+    local fver="me520.d37.250923"
     
     install_bin $fid $fver
 }

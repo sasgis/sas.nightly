@@ -1,7 +1,8 @@
 
 :: ---------- Compiler version setup ----------
 
-set BDS_VER=21.0
+set BDS_VER_x32=21.0
+set BDS_VER_x64=37.0
 
 :: --------------------------------------------
 
@@ -14,13 +15,17 @@ set TARGET="%2%"
 if %TARGET%=="64" (goto platform_x64) else (goto platform_x32)
 
 :platform_x32
+set BDS_VER=%BDS_VER_x32%
 set PLATFORM=32
 set DCC=dcc32.exe
+set PE_OS=5.0
 goto platform_end
 
 :platform_x64
+set BDS_VER=%BDS_VER_x64%
 set PLATFORM=64
 set DCC=dcc64.exe
+set PE_OS=6.0
 goto platform_end
 
 :platform_end
@@ -55,5 +60,5 @@ cd %SRC%
 set ALIAS=Generics.Collections=System.Generics.Collections;Generics.Defaults=System.Generics.Defaults;WinTypes=Windows;WinProcs=Windows;DbiTypes=BDE;DbiProcs=BDE;DbiErrs=BDE
 set NAMESPASE=System.Win;Data.Win;Datasnap.Win;Web.Win;Soap.Win;Xml.Win;Bde;Vcl;Vcl.Imaging;Vcl.Touch;Vcl.Samples;Vcl.Shell;System;Xml;Data;Datasnap;Web;Soap;Winapi;VclTee
 
-%DCC% --no-config -B -CG -TX.exe -A"%ALIAS%" -NS"%NAMESPASE%" -E".bin" -N".dcu" -$C- -$D- -$L- -$Y- -D"RELEASE" -I"%IPATH%" -U"%UPATH%" -O"%MORMOT%" --peosversion:5.0 --pesubsysversion:5.0 SASPlanet.dpr
+%DCC% --no-config -B -CG -TX.exe -A"%ALIAS%" -NS"%NAMESPASE%" -E".bin" -N".dcu" -$C- -$D- -$L- -$Y- -D"RELEASE" -I"%IPATH%" -U"%UPATH%" -O"%MORMOT%" --peosversion:%PE_OS% --pesubsysversion:%PE_OS% SASPlanet.dpr
  
