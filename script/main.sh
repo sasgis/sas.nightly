@@ -98,6 +98,29 @@ function do_upload {
     fi
 }
 
+function 7z_to_zip {
+
+    local seven_zip_archive=$1
+
+    local zip_archive=$(echo "$seven_zip_archive" | sed -E 's/Stable/Release/; s/\.[0-9]{5}\./\./; s/\.7z$/.zip/')
+
+    local temp_dir="${tmp}/zip"
+
+    # Create a clean temporary directory for extraction
+    rm -rf "$temp_dir"
+    mkdir -p "$temp_dir"
+
+    # Extract the 7z archive to the temporary directory
+    7z x "${sas_uploads}/$seven_zip_archive" -x!SASPlanet.Debug.exe -x!CommitsLog.txt -o"$temp_dir"
+
+    # Create the new ZIP archive from the contents of the temporary directory
+    cd "$temp_dir"
+    7z a -tzip "${sas_uploads}/$zip_archive" ./*
+
+    # Clean up the temporary directory
+    rm -rf "$temp_dir"
+}
+
 log_begin
 
 create_folders
@@ -110,7 +133,10 @@ do_build 64
 
 if [ "$work_type" = "NIGHTLY" ]; then
   do_upload
+elif [ "$work_type" = "RELEASE" ]; then
+  7z_to_zip "${ARCHIVE_32}"
+  7z_to_zip "${ARCHIVE_64}"
 fi
 
-log_end 
+log_end
 
