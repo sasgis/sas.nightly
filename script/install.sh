@@ -37,20 +37,20 @@ function install_bin {
 function install_delphi {
     
     local fid="1CVWMgsQLXjs17P3QQu-k3hrdVTiC2DSc"
-    local fver="d21.241124"
+    local fver="d21.241124" # delphi 10.4.2
     
     install_bin $fid $fver
     
-    local fid="1yQH4UseHKoWP6vtJadNsnuX3h0IXH30y"
-    local fver="d37.250923"
+    local fid="1b5o5NrfwFa6tUg1oX7FUy7l4ErRIF0EO"
+    local fver="d37.260328" # delphi 13.1
     
     install_bin $fid $fver
 }
 
 function install_el {
     
-    local fid="1s43wgdmRP-Bf-9V0puYWEFlWl5KzGqlB"
-    local fver="el713.d21.241124"
+    local fid="13sr6uGWnQffbErI5pSqNl256Cn1c0vUw"
+    local fver="el7131.d21.250204"
     
     install_bin $fid $fver
 }
@@ -58,12 +58,12 @@ function install_el {
 function install_me {
     
     local fid="1GxkAzprYHtI4D-8y3mb928J_tko3T3ah"
-    local fver="me520.d21.250923"
+    local fver="me520.d21.250923" # v5.2.0 (2025-09-15) for delphi 10.4.x
     
     install_bin $fid $fver
     
     local fid="1GHrbdgc5LhVfVYQDpMdD4wqH5TXnZRU8"
-    local fver="me520.d37.250923"
+    local fver="me520.d37.250923" # v5.2.0 (2025-09-15) for delphi 13.x
     
     install_bin $fid $fver
 }
