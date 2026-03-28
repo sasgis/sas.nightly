@@ -32,6 +32,9 @@ files_to_copy = [
     "dcc64.exe",
 ]
 
+# --- Files to Ignore ---
+ignore_patterns = ['*.lsif']
+
 # --- Main Script ---
 def create_directories():
     """Creates the necessary directory structure for the repack."""
@@ -55,13 +58,13 @@ def copy_files():
 def copy_release_folders():
     """Copies the contents of the release folders."""
     if os.path.isdir(source_lib_win32_release):
-        shutil.copytree(source_lib_win32_release, target_lib_win32_release, dirs_exist_ok=True)
+        shutil.copytree(source_lib_win32_release, target_lib_win32_release, dirs_exist_ok=True, ignore=shutil.ignore_patterns(*ignore_patterns))
         print(f"Copied contents of {source_lib_win32_release}")
     else:
         print(f"Warning: Source directory not found - {source_lib_win32_release}")
 
     if os.path.isdir(source_lib_win64_release):
-        shutil.copytree(source_lib_win64_release, target_lib_win64_release, dirs_exist_ok=True)
+        shutil.copytree(source_lib_win64_release, target_lib_win64_release, dirs_exist_ok=True, ignore=shutil.ignore_patterns(*ignore_patterns))
         print(f"Copied contents of {source_lib_win64_release}")
     else:
         print(f"Warning: Source directory not found - {source_lib_win64_release}")
