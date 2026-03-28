@@ -5,5 +5,8 @@ log/**
 tmp/**
 upload/**
 
+/install.cmd
+script/install.sh
+
 script/bintray_config.sh
 /data/*
