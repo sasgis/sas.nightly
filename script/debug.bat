@@ -75,8 +75,9 @@ set EWB=%LIB%\EmbeddedWB\source
 set ALCINOE=%LIB%\Alcinoe-code\source
 set PASCALSCRIPT=%LIB%\PascalScript\Source
 set MORMOT=%LIB%\mORMot;%LIB%\mORMot\SQLite3
+set VTV=%LIB%\virtualtreeview\Source
 
-set IPATH=%SRC%\Src;%ELIB%;%SRCINC%;%CLIPPER2%;%GR32%;%TBX%;%VSAGPS%;%SYNEDIT%;%CCR%;%EWB%;%ALCINOE%;%PASCALSCRIPT%;%MORMOT%
+set IPATH=%SRC%\Src;%ELIB%;%SRCINC%;%CLIPPER2%;%GR32%;%TBX%;%VSAGPS%;%SYNEDIT%;%CCR%;%EWB%;%ALCINOE%;%PASCALSCRIPT%;%MORMOT%;%VTV%
 set UPATH=%BDS%\lib\win%PLATFORM%\release;%IPATH%
 set OPATH=%MORMOT%
 set RPATH=%ERES%
