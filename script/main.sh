@@ -54,6 +54,7 @@ function do_build {
         make_commits_log
         add_dlls
         add_data
+        remove_obsolete_dll_versions
         
         local sas_arch
         if [ $work_platform -eq 32 ]; then

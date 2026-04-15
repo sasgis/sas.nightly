@@ -231,6 +231,30 @@ function add_data {
     fi
 }
 
+function remove_obsolete_dll_versions {
+
+    local target_dir="${sas_bin}/lib${work_platform}"
+
+    cd "$target_dir" || { echo "Error: Dlls directory not found ${target_dir}"; return 1; }
+
+    for pattern in "libopenjph-*.dll" "libraw-*.dll"; do
+
+        set -- $pattern
+
+        # Skip if no files matched OR only one file found
+        if [ "$1" = "$pattern" ] || [ "$#" -le 1 ]; then
+            continue
+        fi
+
+        echo "Cleaning pattern: $pattern (found $# files)"
+
+        # Sort files by version, remove last (newest), delete rest
+        printf '%s\n' "$@" | sort -V | sed '$d' | while IFS= read -r file; do
+            rm -v -- "$file"
+        done
+    done
+}
+
 function log_begin {
 
     echo "Start at: $(date +"%Y-%m-%d %H:%M:%S")"
