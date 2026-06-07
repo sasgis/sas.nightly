@@ -49,6 +49,12 @@ if __name__ == "__main__":
 
     script_dir = os.path.dirname(os.path.abspath(__file__))
 
+    print("Processing XP libraries...")
+    copy_dlls(
+        source_dir=os.path.join(script_dir, "..", "..", "src", ".bin", "win32", "libxp"),
+        target_dir=os.path.join(script_dir, "..", "data", "win32", "libxp")
+    )
+
     print("Processing 32-bit libraries...")
     copy_dlls(
         source_dir=os.path.join(script_dir, "..", "..", "src", ".bin", "win32", "lib32"),

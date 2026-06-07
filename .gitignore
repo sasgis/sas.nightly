@@ -1,12 +1,10 @@
 bin/**
 cache/**
+data/**
 info/**
 log/**
 tmp/**
 upload/**
 
 /install.cmd
-script/install.sh
-
-script/bintray_config.sh
-/data/*
+/script/install.sh
