@@ -74,12 +74,11 @@ set CCR=%LIB%\ccr-exif
 set EWB=%LIB%\EmbeddedWB\source
 set ALCINOE=%LIB%\Alcinoe-code\source
 set PASCALSCRIPT=%LIB%\PascalScript\Source
-set MORMOT=%LIB%\mORMot;%LIB%\mORMot\SQLite3
+set MORMOT=%LIB%\mormot2\src;%LIB%\mormot2\src\core;%LIB%\mormot2\src\crypt;%LIB%\mormot2\src\db;%LIB%\mormot2\src\lib;%LIB%\mormot2\src\misc;%LIB%\mormot2\src\net;%LIB%\mormot2\src\orm;%LIB%\mormot2\src\rest;%LIB%\mormot2\src\soa
 set VTV=%LIB%\virtualtreeview\Source
 
 set IPATH=%SRC%\Src;%ELIB%;%SRCINC%;%CLIPPER2%;%GR32%;%TBX%;%VSAGPS%;%SYNEDIT%;%CCR%;%EWB%;%ALCINOE%;%PASCALSCRIPT%;%MORMOT%;%VTV%
 set UPATH=%BDS%\lib\win%PLATFORM%\release;%IPATH%
-set OPATH=%MORMOT%
 set RPATH=%ERES%
 
 cd %SRC%\Resources
@@ -90,7 +89,7 @@ cd %SRC%
 set ALIAS=Generics.Collections=System.Generics.Collections;Generics.Defaults=System.Generics.Defaults;WinTypes=Windows;WinProcs=Windows;DbiTypes=BDE;DbiProcs=BDE;DbiErrs=BDE
 set NAMESPASE=System.Win;Data.Win;Datasnap.Win;Web.Win;Soap.Win;Xml.Win;Bde;Vcl;Vcl.Imaging;Vcl.Touch;Vcl.Samples;Vcl.Shell;System;Xml;Data;Datasnap;Web;Soap;Winapi;VclTee
 
-%DCC% --no-config -B -CG -TX.exe -A"%ALIAS%" -NS"%NAMESPASE%" -E".bin" -N".dcu" -M -GD -$O- -$W+ -$D+ -D"DEBUG;%EDEF%" -I"%IPATH%" -U"%UPATH%" -O"%OPATH%" -R"%RPATH%" --peosversion:%PE_OS% --pesubsysversion:%PE_OS% SASPlanet.dpr
+%DCC% --no-config -B -CG -TX.exe -A"%ALIAS%" -NS"%NAMESPASE%" -E".bin" -N".dcu" -M -GD -$O- -$W+ -$D+ -D"DEBUG;%EDEF%" -I"%IPATH%" -U"%UPATH%" -R"%RPATH%" --peosversion:%PE_OS% --pesubsysversion:%PE_OS% SASPlanet.dpr
 
 @echo.
 
