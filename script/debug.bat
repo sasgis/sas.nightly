@@ -76,8 +76,9 @@ set ALCINOE=%LIB%\Alcinoe-code\source
 set PASCALSCRIPT=%LIB%\PascalScript\Source
 set MORMOT=%LIB%\mormot2\src;%LIB%\mormot2\src\core;%LIB%\mormot2\src\crypt;%LIB%\mormot2\src\db;%LIB%\mormot2\src\lib;%LIB%\mormot2\src\misc;%LIB%\mormot2\src\net;%LIB%\mormot2\src\orm;%LIB%\mormot2\src\rest;%LIB%\mormot2\src\soa
 set VTV=%LIB%\virtualtreeview\Source
+set WV4D=%LIB%\webview4delphi\source
 
-set IPATH=%SRC%\Src;%ELIB%;%SRCINC%;%CLIPPER2%;%GR32%;%TBX%;%VSAGPS%;%SYNEDIT%;%CCR%;%EWB%;%ALCINOE%;%PASCALSCRIPT%;%MORMOT%;%VTV%
+set IPATH=%SRC%\Src;%ELIB%;%SRCINC%;%CLIPPER2%;%GR32%;%TBX%;%VSAGPS%;%SYNEDIT%;%CCR%;%EWB%;%ALCINOE%;%PASCALSCRIPT%;%MORMOT%;%VTV%;%WV4D%
 set UPATH=%BDS%\lib\win%PLATFORM%\release;%IPATH%
 set RPATH=%ERES%
 
